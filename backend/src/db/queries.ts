@@ -55,7 +55,7 @@ export const getAllProducts = async () => {
 	});
 };
 
-export const getProductById = async (id: string) => {
+export const getProductById = async (id: any) => {
 	return db.query.products.findFirst({
 		where: eq(products.id, id),
 		with: {
@@ -78,7 +78,7 @@ export const getProductsByUserId = async (userId: string) => {
 	});
 };
 
-export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
+export const updateProduct = async (id: any, data: Partial<NewProduct>) => {
 	const existingProduct = await getProductById(id);
 	if (!existingProduct) throw new Error("Product not found");
 	const [product] = await db
@@ -88,7 +88,7 @@ export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
 		.returning();
 	return product;
 };
-export const deleteProduct = async (id: string) => {
+export const deleteProduct = async (id: any) => {
 	const existingProduct = await getProductById(id);
 	if (!existingProduct) throw new Error("Product not found");
 	const [product] = await db
@@ -99,18 +99,18 @@ export const deleteProduct = async (id: string) => {
 };
 
 // Comments queries
-export const createComment = async (data: NewComment) => {
+export const createComment = async (data: NewComment | any) => {
 	const [comment] = await db.insert(comments).values(data).returning();
 	return comment;
 };
 
-export const getCommentById = async (id: string) => {
+export const getCommentById = async (id: any) => {
 	return db.query.comments.findFirst({
 		where: eq(comments.id, id),
 		with: { user: true },
 	});
 };
-export const deleteComment = async (id: string) => {
+export const deleteComment = async (id: any) => {
 	const existingComment = await getCommentById(id);
 	if (!existingComment) throw new Error("Comment not found");
 	const [comment] = await db
