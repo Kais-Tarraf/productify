@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
@@ -19,9 +19,18 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/product/:id" element={<Product />} />
-					<Route path="/profile" element={<Profile />} />
-					<Route path="/create" element={<CreateProduct />} />
-					<Route path="/edit/:id" element={<EditProduct />} />
+					<Route
+						path="/profile"
+						element={isSignedIn ? <Profile /> : <Navigate to="/" />}
+					/>
+					<Route
+						path="/create"
+						element={isSignedIn ? <CreateProduct /> : <Navigate to="/" />}
+					/>
+					<Route
+						path="/edit/:id"
+						element={isSignedIn ? <EditProduct /> : <Navigate to="/" />}
+					/>
 				</Routes>
 			</main>
 		</div>

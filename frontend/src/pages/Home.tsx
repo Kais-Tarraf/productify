@@ -1,9 +1,9 @@
 import { SignInButton } from "@clerk/react";
 import LoadingSpinner from "../components/LoadingSpinner";
-import useProduct from "../hooks/useProduct";
 import { PackageIcon, SparklesIcon } from "lucide-react";
 import { Link } from "react-router";
 import ProductCard from "../components/ProductCard";
+import { useProduct } from "../hooks/useProduct";
 
 const Home = () => {
 	const { data: products, isLoading, error } = useProduct();
